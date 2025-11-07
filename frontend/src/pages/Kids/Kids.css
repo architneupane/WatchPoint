@@ -1,0 +1,11 @@
+.kids{
+    margin: 50px;
+}
+
+.kids .heading{
+    text-align: center;
+}
+
+.kids .heading p{
+    color: grey;
+}

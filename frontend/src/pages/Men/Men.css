@@ -1,0 +1,11 @@
+.men{
+    margin: 50px;
+}
+
+.men .heading{
+    text-align: center;
+}
+
+.men .heading p{
+    color: grey;
+}

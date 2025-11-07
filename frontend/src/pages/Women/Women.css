@@ -1,0 +1,11 @@
+.women{
+    margin: 50px;
+}
+
+.women .heading{
+    text-align: center;
+}
+
+.women .heading p{
+    color: grey;
+}
