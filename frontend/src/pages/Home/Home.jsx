@@ -1,12 +1,13 @@
-import React from "react";
 import "./Home.css";
 import { Link } from 'react-router-dom';
-import BannerSlider from "../../component/BannerSlider/BannerSlider";
+import BannerSlider from "../../components/BannerSlider/BannerSlider.jsx";
+
 
 
 function Home() {
+
   return (
-    <div>
+  <div>
     <BannerSlider />
       <div className="new-collection">
         <div className="heading">
@@ -105,11 +106,14 @@ function Home() {
 
       <div className="navigate-links">
         <table>
+          <thead>
             <tr>
                 <th>Product</th>
                 <th>Categories</th>
                 <th>Our Social Media</th>
             </tr>
+            </thead>
+            <tbody>
             <tr>
                 <td>Classic Watches</td>
                 <td><Link to='/men'>Men</Link></td>
@@ -130,6 +134,7 @@ function Home() {
                 <td></td>
                 <td>Youtube</td>
             </tr>
+            </tbody>
         </table>
       </div>
       </div>

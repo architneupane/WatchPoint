@@ -1,5 +1,7 @@
-import React from "react";
+import axios from "axios"
 import "../YourCart/YourCart.css";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { CiCirclePlus } from "react-icons/ci";
 import { CiCircleMinus } from "react-icons/ci";
@@ -7,10 +9,24 @@ import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 
 
 function YourCart() {
+
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    axios.get("http://localhost:8000/api/users/verify",
+      {withCredentials: true}
+    )
+    .then(()=>{
+      navigate("/cart")
+    })
+    .catch(()=>{
+      navigate("/login")
+      console.log("User not Authenticate")
+    })
+  },[navigate])
+
   return (
-    // Main cart page
     <div className="cart">
-      {/* Your Cart Sec */}
       <div className="your-cart">
         <h1>Your Cart</h1>
 
@@ -160,8 +176,6 @@ function YourCart() {
           </div>
         </div>
       </div>
-
-      {/* Summary Sec */}
       <div className="summary">
         <h1>Summary</h1>
         <div className="detail-row">
