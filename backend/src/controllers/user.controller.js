@@ -88,7 +88,7 @@ export const loginUser = asyncHandler( async (req,res) =>{
     })
     
     res.status(200).json(
-        new ApiResponse(200, "User logged in Successfully")
+        new ApiResponse(200, user, "User logged in Successfully")
     )
     })
 
@@ -100,7 +100,7 @@ export const logoutUser = (req,res)=>{
     })
 
     res.status(200).json(
-        new ApiResponse(200,null, "LogOut Successfully")
+        new ApiResponse(200, null, "LogOut Successfully")
     )
 }    
 

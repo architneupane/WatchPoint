@@ -22,7 +22,6 @@ export const addToCart = asyncHandler( async(req,res) => {
 export const getCartItems = asyncHandler(async (req, res) => {
   const cartItems = await Cart.find({ user: req.user.id }).populate("product");
 
-    console.log(cartItems)
   if (cartItems) {
     res.status(200).json(
       new ApiResponse(200, cartItems, "Cart Items")
@@ -31,3 +30,17 @@ export const getCartItems = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Server error");
   }
 });
+
+export const removeCartItem = asyncHandler(async (req,res) => {
+  const {itemId} = req.body
+
+  const cartItem = await Cart.findOneAndDelete({
+    _id: itemId,
+    user: req.user.id
+  })
+
+  if(cartItem){
+    res.status(200).json(
+    new ApiResponse(200, "Cart Item Deleted successfully"))
+  }
+})

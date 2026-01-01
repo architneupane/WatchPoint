@@ -21,7 +21,7 @@ function Login() {
       )
       .then(res =>{
         setUser(res.data.data); 
-        console.log(res.data, "Login Successfully")
+        console.log("Login Successfully")
         navigate('/')
       })
       .catch ((err) => {

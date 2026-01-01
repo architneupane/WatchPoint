@@ -17,8 +17,9 @@ function Navbar() {
         {},
         { withCredentials: true }
       )
-      .then(() => {
+      .then((res) => {
         setUser(null);
+        console.log(res.data.message)
         navigate("/");
       })
       .catch((err) => console.log(err));
@@ -30,8 +31,8 @@ function Navbar() {
       .then((res) => {
         setUser(res.data.data);
       })
-      .catch(() => {
-        console.log("User not Authenticate");
+      .catch((error) => {
+        console.log("User not Authenticate", error);
       });
   }, []);
 
