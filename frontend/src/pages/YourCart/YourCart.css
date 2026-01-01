@@ -1,6 +1,7 @@
 .cart{
     margin: 10px 50px;
     display: flex;
+    justify-content: space-between;
 }
 
 .your-cart{
@@ -19,6 +20,10 @@
     border-radius: 20px;
 }
 
+.your-cart{
+    max-width: 57%;
+}
+
 .product-detail{
     padding-top: 40px;
     padding-left: 30px;
@@ -30,11 +35,7 @@
 }
 
 .details{
-    padding-right: 230px;
-}
-
-.details span{
-    font-size: 16px;
+    padding-right: 100px;
 }
 
 .product-details h4{
@@ -46,27 +47,30 @@
     justify-content: space-between;
 }
 
-.options ul{
-    display: flex;
-    list-style-type: none;
-    padding-left: 5px;
+.options p{
+    padding-top: 20px;
+    color: #888;
+    margin-right: 160px;
 }
 
-.options button , .options p{
+.options button {
     font-size: 26px;
     margin-top: 30px;
     border: none;
     background-color: transparent;
-}
-
-.options ul li{
-    margin-left: 20px;
-}   
+}  
 
 .details .detail-row {
   display: flex;
   gap: 8px;
-  margin-top: 16px;
+}
+
+.summary{
+    width: 40%;
+}
+
+.summary-heading{
+    margin: 0px;
 }
 
 .label {
@@ -76,12 +80,8 @@
   font-size: 1px;
 }
 
-.value {
+.detail-row .value {
   color: #222;
-}
-
-.summary{
-    width: 40%;
 }
 
 .summary .detail-row, .total{
@@ -89,15 +89,75 @@
   justify-content: space-between;
 }
 
-.summary .detail-row .lable, hr, .total{
+.detail-row .lable, .value, hr, .total{
     margin-top: 25px;
 }
 
-.checkout-now{
-    width: 100%;
+.delivery-details{
+ margin-top: 60px;
+}
+
+.delivery-address{
+    width: 400px;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.city-list{
+  width: 150px;
+  padding: 10px 10px;
+  margin: 15px 15px 10px 0px;
+  border: 2px solid black;
+  border-radius: 20px;
+  appearance: base-select;
+  cursor: pointer;
+  font-size: small;
+}
+
+.reciever-details {
+    margin-top: 20px;
+}
+
+.reciever-details input{
+    width: 270px;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 7px;
+    margin: 5px 0px;
+}
+
+.reciever-details label{
+    font-size: small;
+}
+
+.reciever-detail{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cash-on-delivery{
+    width: 280px;
     height: 40px;
+    margin-top: 35px ;
+    border: none;
     border-radius: 20px;
     background-color: black;
     color: white;
-    margin-top: 20px;
+}
+
+.esewa{
+    width: 280px;
+    height: 40px;
+    margin-top: 35px ;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #3cc850;
+    color: black;
 }
