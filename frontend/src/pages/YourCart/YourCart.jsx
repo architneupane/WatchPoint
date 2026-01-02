@@ -4,16 +4,31 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
+import { useCart } from "../../Context/CartContext";
+
+// import EsewaButton from "../../components/EsewaButton/EsewaButton";
 
 function YourCart() {
-  const [products, setProducts] = useState([]);
-
+  const {products, setProducts} = useCart()
+  const {subTotal} = useCart()
   const navigate = useNavigate();
+
   const deliveryCharge = 100;
-  const totalPrice = products.reduce(
-    (total, item) => total + item.product.price,
-    0
-  );
+  const totalPrice = subTotal + deliveryCharge;
+
+  // const [deliveryDetails, setDeliveryDetails] = useState({
+  //   deliveryCity:"",
+  //   deliveryAddress: "",
+  //   fullName: "",
+  //   contactNo: ""
+  // })
+
+  // const handleChange = (e)=>{
+  //   setDeliveryDetails({
+  //     ...deliveryDetails,
+  //       [e.target.name]: e.target.value
+  //   })
+  // }
 
   const handleRemoveToCart = (itemId) => {
     axios
@@ -28,6 +43,14 @@ function YourCart() {
       })
       .catch((err) => console.log(err));
   };
+
+  // const handleDeliveryDetails = () =>{
+  //    axios.post("http://localhost:8000/api/payments/createorder",{
+  //     deliveryDetails, 
+  //     amount: totalPrice
+  //   }, {withCredentials: true})
+
+
 
   useEffect(() => {
     axios
@@ -52,6 +75,7 @@ function YourCart() {
       .catch((err) => console.log(err.message));
   }, []);
 
+
   return (
     <div className="cart">
       <div className="your-cart">
@@ -66,7 +90,6 @@ function YourCart() {
                 <div className="details">
                   <h4>{item.product.name}</h4>
                 </div>
-
                 <div className="price">
                   <h4>NPR {item.product.price}</h4>
                 </div>
@@ -86,74 +109,28 @@ function YourCart() {
           </div>
         ))}
       </div>
-
-      <div className="summary">
-        <h1 className="summary-heading">Summary</h1>
-        <div className="detail-row">
-          <span className="lable">
-            Subtotal <HiOutlineQuestionMarkCircle />
-          </span>
-          <span className="value">{totalPrice}</span>
-        </div>
-        <div className="detail-row">
-          <span className="lable">Delivery & Handling Charge</span>
-          <span className="value">{deliveryCharge}</span>
-        </div>
-        <hr />
-        <div className="total">
-          <span className="lable">Total</span>
-          <span>{totalPrice + deliveryCharge}</span>
-        </div>
-
-        <div className="delivery-details">
-          <h1>Delivery Details</h1>
-          <div>
-            <span>Address Details</span> <br />
-            <select className="city-list" name="city">
-              <option value="" disabled selected>
-                Choose a City
-              </option>
-              <option value="">Kathmandu</option>
-              <option value="">Bhaktapur</option>
-              <option value="">Lalitpur</option>
-              <option value="">Butwal</option>
-              <option value="">Pokhara</option>
-            </select>
-            <input
-              className="delivery-address"
-              type="text"
-              name="delivery-address"
-              placeholder="Address"
-            />
-          </div>
-
-          <div className="reciever-details">
-            <span>Reciever Details</span>
-            <div className="reciever-detail">
-              <div>
-                <label htmlFor="fullName">Full Name :</label>
-                <br />
-                <input type="text" name="fullName" placeholder="Full Name" />
-              </div>
-
-              <div>
-                <label htmlFor="contactNumber">Contact Number :</label> <br />
-                <input
-                  type="number"
-                  name="contactNumber"
-                  placeholder="Contact Number"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="checkout">
-          <button className="cash-on-delivery" >Cash On Delivery</button>
-          <button className="esewa">eSewa</button>
-        </div>
+    <div className="summary">
+      <h1 className="summary-heading">Summary</h1>
+      <div className="detail-row">
+        <span className="lable">
+          Subtotal <HiOutlineQuestionMarkCircle />
+        </span>
+        <span className="value">{subTotal}</span>
+      </div>
+      <div className="detail-row">
+        <span className="lable">Delivery & Handling Charge</span>
+        <span className="value">{deliveryCharge}</span>
+      </div>
+      <hr />
+      <div className="total">
+        <span className="lable">Total</span>
+        <span>{totalPrice}</span>
+      </div>
+      <div className="checkout">
+        <button>Checkout</button>
       </div>
     </div>
-  );
-}
+    </div>
+  );}
 
 export default YourCart;

@@ -1,31 +1,35 @@
-import Navbar from './components/Navbar/Navbar'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Home from './pages/Home/Home'
-import Login from './pages/Login/Login'
-import Register from './pages/Register/Register'
-import Men from './pages/Men/Men'
-import Women from './pages/Women/Women'
-import Kids from './pages/Kids/Kids'
-import YourCart from './pages/YourCart/YourCart'
-import Footer from './components/Footer/Footer'
-import ScrollToTop from './components/ScrollToTop/ScrollToTop'
+import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Men from "./pages/Men/Men";
+import Women from "./pages/Women/Women";
+import Kids from "./pages/Kids/Kids";
+import YourCart from "./pages/YourCart/YourCart";
+import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import DeliveryDetail from "./pages/DeliveryDetail/DeliveryDetail";
 
 function App() {
   return (
-    <div className="app"> 
+    <div className="app">
       <BrowserRouter>
         <ScrollToTop />
         <Navbar />
 
-        <main className="content"> 
+        <main className="content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/men" element={<Men />} />
             <Route path="/women" element={<Women />} />
             <Route path="/kids" element={<Kids />} />
             <Route path="/cart" element={<YourCart />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/delivery-detail" element={< DeliveryDetail />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>
 
@@ -35,4 +39,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

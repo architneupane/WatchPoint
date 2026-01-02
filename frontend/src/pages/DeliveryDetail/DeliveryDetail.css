@@ -1,0 +1,68 @@
+.delivery{
+    margin: 30px 50px;
+    display: flex ;
+    justify-content: space-between;
+}
+
+.city-list{
+  width: 200px;
+  padding: 15px;
+  margin: 15px 15px 10px 0px;
+  border: 2px solid black;
+  border-radius: 30px;
+  appearance: base-select;
+  cursor: pointer;
+  font-size: small;
+}
+
+.delivery-address{
+    width: 500px;
+    border: 2px solid black;
+    border-radius: 30px;
+    padding: 15px;
+}
+
+.reciever-details {
+    margin-top: 20px;
+}
+
+.reciever-details input{
+    width: 350px;
+    border: 2px solid black;
+    border-radius: 30px;
+    padding: 15px;
+    margin: 5px 0px;
+}
+
+.reciever-detail{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment{
+    margin-top: 50px;
+}
+
+.payment-method{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cash-on-delivery{
+    width: 350px;
+    height: 50px;
+    border: none;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+}
+
+.esewa{
+    width: 350px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 30px;
+    background-color: #3cc850;
+    color: black;
+}
