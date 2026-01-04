@@ -1,13 +1,22 @@
 import { useCart } from "../../Context/CartContext";
 import "../DeliveryDetail/DeliveryDetail.css";
-// import EsewaButton from "../../components/EsewaButton/EsewaButton";
+import EsewaButton from "../../components/EsewaButton/EsewaButton";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function DeliveryDetail() {
     const {subTotal} = useCart()
+    const [orderId, setOrderId] = useState('')
  
     const deliveryCharge = 100;
     const totalPrice = subTotal + deliveryCharge;
+
+    useEffect(()=>{
+      axios.get('http://localhost:8000/api/payments/getorderid',{withCredentials: true})
+      .then(res => setOrderId(res.data.data._id))
+      .catch(err => console.error(err));
+    },[])
 
   return (
     <div className="delivery">
@@ -58,10 +67,11 @@ function DeliveryDetail() {
             <h1>Payment</h1>
           <div className="payment-method">
             <button className="cash-on-delivery">Cash On Delivery</button>
-            <button className="esewa"></button>
+
           </div>
         </div>
       </form>
+
       <div className="summary">
             <h1 className="summary-heading">Summary</h1>
             <div className="detail-row">
@@ -80,6 +90,7 @@ function DeliveryDetail() {
               <span>{totalPrice}</span>
             </div>
           </div>
+            <div className="esewa"><EsewaButton amount={totalPrice} orderId={orderId} /></div>
     </div>
   );
 }

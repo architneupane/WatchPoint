@@ -7,7 +7,7 @@ function Women() {
  const [products, setProducts] = useState([])
 
  useEffect(()=>{
-  axios.get('http://localhost:8000/api/products/allproducts?category=Women')
+  axios.get('http://localhost:8000/api/products/allproducts?productCategory=women')
   .then(res => setProducts(res.data.data))
  },[])
 

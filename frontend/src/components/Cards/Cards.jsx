@@ -16,10 +16,10 @@ function Cards({products}) {
         <div className="cards">
           {products?.map(product => (
             <div key={product._id} className="card">
-            <img src={product.image} alt="Image not found" />
-            <h4>{product.name}</h4>
-            <p>{product.description}</p>
-            <h4>NPR {product.price}</h4>
+            <img src={product.productImage} alt="Image not found" />
+            <h4>{product.productName}</h4>
+            <p>{product.productDescription}</p>
+            <h4>NPR {product.productPrice}</h4>
             <button onClick={() => handleAddToCart(product)} >Add to Cart</button>
           </div>
           ))}

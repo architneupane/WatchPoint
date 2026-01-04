@@ -8,7 +8,7 @@ function Kids() {
   const[products, setProducts] = useState([])
 
   useEffect(()=>{
-    axios.get('http://localhost:8000/api/products/allproducts?category=Kids')
+    axios.get('http://localhost:8000/api/products/allproducts?productCategory=kids')
     .then(res => setProducts(res.data.data))
   },[])
 

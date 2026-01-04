@@ -24,7 +24,7 @@ const EsewaButton = ({ amount, orderId }) => {
       />
 
       <button type="submit">
-        eSewa
+        Pay with eSewa
       </button>
     </form>
   )

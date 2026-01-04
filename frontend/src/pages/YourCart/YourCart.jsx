@@ -9,8 +9,9 @@ import { useCart } from "../../Context/CartContext";
 // import EsewaButton from "../../components/EsewaButton/EsewaButton";
 
 function YourCart() {
-  const {products, setProducts} = useCart()
-  const {subTotal} = useCart()
+  const { products, setProducts } = useCart();
+  const { subTotal } = useCart();
+  const { addToCart } = useCart();
   const navigate = useNavigate();
 
   const deliveryCharge = 100;
@@ -23,12 +24,19 @@ function YourCart() {
   //   contactNo: ""
   // })
 
-  // const handleChange = (e)=>{
-  //   setDeliveryDetails({
-  //     ...deliveryDetails,
-  //       [e.target.name]: e.target.value
-  //   })
-  // }
+const handleCheckOut = async () => {
+  try {
+    const res = await axios.post(
+      "http://localhost:8000/api/payments/createorder",
+      { amount: totalPrice },
+      { withCredentials: true }
+    );
+    console.log(res.data.data);
+    navigate("/delivery-detail");
+  } catch (err) {
+    console.error("Checkout failed:", err);
+  }
+};
 
   const handleRemoveToCart = (itemId) => {
     axios
@@ -45,12 +53,6 @@ function YourCart() {
   };
 
   // const handleDeliveryDetails = () =>{
-  //    axios.post("http://localhost:8000/api/payments/createorder",{
-  //     deliveryDetails, 
-  //     amount: totalPrice
-  //   }, {withCredentials: true})
-
-
 
   useEffect(() => {
     axios
@@ -75,29 +77,28 @@ function YourCart() {
       .catch((err) => console.log(err.message));
   }, []);
 
-
   return (
     <div className="cart">
       <div className="your-cart">
         <h1>Your Cart</h1>
         {products.map((item) => (
-          <div key={item._id} className="product">
+          <div key={item?._id} className="product">
             <div className="img-container">
-              <img src={item.product.image} alt="" />
+              <img src={item?.product?.productImage} alt="" />
             </div>
             <div className="product-detail">
               <div className="product-details">
                 <div className="details">
-                  <h4>{item.product.name}</h4>
+                  <h4>{item?.product?.productName}</h4>
                 </div>
                 <div className="price">
-                  <h4>NPR {item.product.price}</h4>
+                  <h4>NPR {item?.product?.productPrice}</h4>
                 </div>
               </div>
 
               <div className="options">
                 <div className="product-description">
-                  <p>{item.product.description}</p>
+                  <p>{item?.product?.productDescription}</p>
                 </div>
                 <div>
                   <button onClick={() => handleRemoveToCart(item._id)}>
@@ -109,28 +110,29 @@ function YourCart() {
           </div>
         ))}
       </div>
-    <div className="summary">
-      <h1 className="summary-heading">Summary</h1>
-      <div className="detail-row">
-        <span className="lable">
-          Subtotal <HiOutlineQuestionMarkCircle />
-        </span>
-        <span className="value">{subTotal}</span>
-      </div>
-      <div className="detail-row">
-        <span className="lable">Delivery & Handling Charge</span>
-        <span className="value">{deliveryCharge}</span>
-      </div>
-      <hr />
-      <div className="total">
-        <span className="lable">Total</span>
-        <span>{totalPrice}</span>
-      </div>
-      <div className="checkout">
-        <button>Checkout</button>
+      <div className="summary">
+        <h1 className="summary-heading">Summary</h1>
+        <div className="detail-row">
+          <span className="lable">
+            Subtotal <HiOutlineQuestionMarkCircle />
+          </span>
+          <span className="value">{subTotal}</span>
+        </div>
+        <div className="detail-row">
+          <span className="lable">Delivery & Handling Charge</span>
+          <span className="value">{deliveryCharge}</span>
+        </div>
+        <hr />
+        <div className="total">
+          <span className="lable">Total</span>
+          <span>{totalPrice}</span>
+        </div>
+        <div className="checkout">
+          <button onClick={handleCheckOut}>Checkout</button>
+        </div>
       </div>
     </div>
-    </div>
-  );}
+  );
+}
 
 export default YourCart;
