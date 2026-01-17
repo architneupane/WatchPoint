@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminDashboard.css";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function AdminDashboard() {
   const [productNameForRemove, setProductNameForRemove] = useState({});
+  const [totalRegisteredUsers, setTotalRegisteredUsers] = useState();
+  const [totalProducts, setTotalProducts] = useState("");
+  const [totalOrders, setTotalOrders] = useState("");
+
   const [formData, setFormData] = useState({
     productName: "",
     productDescription: "",
@@ -25,11 +30,9 @@ function AdminDashboard() {
 
     axios
       .post("http://localhost:8000/api/products/addproduct", formData, {})
-      .then((res) => {
-        console.log(res?.data?.message);
-      })
+      .then((res) => toast.success(res?.data?.message))
       .catch((err) => {
-        console.log(err?.response?.data?.message);
+        toast.error(err?.response?.data?.message || "Internal Server Failure");
       });
   };
 
@@ -41,13 +44,24 @@ function AdminDashboard() {
         productNameForRemove,
         {}
       )
-      .then((res) => {
-        console.log(res?.data?.message);
-      })
+      .then((res) => toast.success(res?.data?.message))
       .catch((err) => {
-        console.log(err?.response?.data?.message);
+        toast.error(err?.response?.data?.message || "Internal Server Failure");
       });
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/admin/get-insights", {})
+      .then((res) => {
+        setTotalOrders(res?.data?.data?.totalOrders);
+        setTotalProducts(res?.data?.data?.totalProducts);
+        setTotalRegisteredUsers(res?.data?.data?.totalUsers);
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.message || "Internal Server Failure");
+      });
+  }, []);
 
   return (
     <div className="admin-dashboard">
@@ -124,9 +138,9 @@ function AdminDashboard() {
         <div className="insight-container">
           <h1>Insights</h1>
           <div className="insights">
-            <p>Total Registered Users :</p>
-            <p>Total Products :</p>
-            <p>Total Orders :</p>
+            <p>Total Registered Users : {totalRegisteredUsers}</p>
+            <p>Total Products : {totalProducts}</p>
+            <p>Total Orders : {totalOrders} </p>
           </div>
         </div>
 

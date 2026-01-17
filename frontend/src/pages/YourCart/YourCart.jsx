@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 import { useCart } from "../../Context/CartContext";
-
-// import EsewaButton from "../../components/EsewaButton/EsewaButton";
+import toast from "react-hot-toast";
 
 function YourCart() {
   const { products, setProducts } = useCart();
@@ -17,26 +16,18 @@ function YourCart() {
   const deliveryCharge = 100;
   const totalPrice = subTotal + deliveryCharge;
 
-  // const [deliveryDetails, setDeliveryDetails] = useState({
-  //   deliveryCity:"",
-  //   deliveryAddress: "",
-  //   fullName: "",
-  //   contactNo: ""
-  // })
-
-const handleCheckOut = async () => {
-  try {
-    const res = await axios.post(
-      "http://localhost:8000/api/payments/createorder",
-      { amount: totalPrice },
-      { withCredentials: true }
-    );
-    console.log(res.data.data);
-    navigate("/delivery-detail");
-  } catch (err) {
-    console.error("Checkout failed:", err);
-  }
-};
+  const handleCheckOut = async () => {
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/payments/createorder",
+        { amount: totalPrice },
+        { withCredentials: true }
+      );
+      navigate("/delivery-detail");
+    } catch (err) {
+      console.error("Checkout failed:", err);
+    }
+  };
 
   const handleRemoveToCart = (itemId) => {
     axios
@@ -47,12 +38,12 @@ const handleCheckOut = async () => {
       )
       .then((res) => {
         setProducts((prev) => prev.filter((item) => item._id !== itemId));
-        console.log(res.data);
+        toast.success(res?.data?.message);
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        toast.error(err?.response?.data?.message || "Internal Server Failure")
+      );
   };
-
-  // const handleDeliveryDetails = () =>{
 
   useEffect(() => {
     axios

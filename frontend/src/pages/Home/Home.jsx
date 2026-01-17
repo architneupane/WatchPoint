@@ -2,8 +2,6 @@ import "./Home.css";
 import { Link } from 'react-router-dom';
 import BannerSlider from "../../components/BannerSlider/BannerSlider.jsx";
 
-
-
 function Home() {
 
   return (

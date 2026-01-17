@@ -1,5 +1,6 @@
 import './Cards.css'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 function Cards({products}) {
   
@@ -8,8 +9,8 @@ function Cards({products}) {
       productId: product._id,
       quantity: 1
     }, {withCredentials: true})
-    .then(res => console.log(res.data))
-    .catch(err => console.error(err));
+    .then(res => toast.success(res.data.message))
+    .catch(err => toast.error(err?.response?.data?.message || "Failed to add item to cart" ));
   })
 
   return (

@@ -5,6 +5,7 @@ import { UserContext } from "../../Context/UserContext";
 import { FiSearch } from "react-icons/fi";
 import { PiHandbagBold } from "react-icons/pi";
 import { NavLink, useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast'
 
 function Navbar() {
   const { user, setUser } = useContext(UserContext);
@@ -19,10 +20,10 @@ function Navbar() {
       )
       .then((res) => {
         setUser(null);
-        console.log(res.data.message)
+        toast.success(res?.data?.message)
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err?.response?.data?.message));
   };
 
   useEffect(() => {
@@ -31,10 +32,10 @@ function Navbar() {
       .then((res) => {
         setUser(res.data.data);
       })
-      .catch((error) => {
-        console.log("User not Authenticate", error);
+      .catch((err) => {
+        console.log(err?.response?.data?.message);
       });
-  }, []);
+  }, [ ]);
 
   return (
     <div className="navbar">

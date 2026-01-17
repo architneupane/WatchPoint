@@ -12,7 +12,7 @@ export const addToCart = asyncHandler( async(req,res) => {
       quantity
    })
    res.status(201).json(
-    new ApiResponse(201, cart, "Product Added to Cart")
+    new ApiResponse(201, cart, "Product Added to Your Cart")
    )
    } catch(err){
     console.error('Add to cart error:', err.message);
@@ -41,6 +41,10 @@ export const removeCartItem = asyncHandler(async (req,res) => {
 
   if(cartItem){
     res.status(200).json(
-    new ApiResponse(200, "Cart Item Deleted successfully"))
+    new ApiResponse(200,{},"Item Successfully Deleted from Your Cart"))
+  }
+
+  if(!cartItem){
+    new ApiError(500, "Failed to Delete Item from Your Cart")
   }
 })

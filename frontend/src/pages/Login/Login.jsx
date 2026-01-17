@@ -3,6 +3,7 @@ import axios from "axios";
 import { UserContext } from "../../Context/UserContext";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast'
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -21,13 +22,13 @@ function Login() {
       )
       .then(res =>{
         setUser(res.data.data); 
-        console.log("Login Successfully")
+        toast.success(res?.data?.message)
         navigate('/')
       })
       .catch ((err) => {
       if (err.response) {
         setError(
-          err.response?.data?.message 
+          err.response?.data?.message || "Internal Server Failure"
         )
       } else {
         console.log("Server not responding or CORS error");
@@ -41,7 +42,7 @@ function Login() {
         <h1 className="login-title">Login User</h1>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="input-box">
-            <label htmlFor="email">Email</label> <br />
+            <label htmlFor="email">Email</label> 
             <input
               type="email"
               name="email"
@@ -52,7 +53,7 @@ function Login() {
           </div>
 
           <div className="input-box">
-            <label htmlFor="password">Password</label> <br />
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               name="password"

@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./Men.css";
 import Cards from "../../components/Cards/Cards.jsx";
 import axios from "axios";
+import toast from 'react-hot-toast'
 
 function Men() {
   const[products, setProducts] = useState([])
 
   useEffect(()=>{
     axios.get('http://localhost:8000/api/products/allproducts?productCategory=men')
-    .then(res => {setProducts(res.data.data)
-      console.log(res.data.data)})
+    .then(res => setProducts(res.data.data))
+    .catch(err => toast.error(err?.response?.data?.message))
    },[])
 
   return (

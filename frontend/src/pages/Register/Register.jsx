@@ -1,5 +1,6 @@
 import "../Register/Register.css";
 import axios from "axios";
+import toast from 'react-hot-toast'
 import { useState } from "react";
 import {useNavigate} from 'react-router-dom'
 
@@ -26,11 +27,12 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
+      const res = await axios.post(
         "http://localhost:8000/api/users/register",
         formData,
         { withCredentials: true }
       );
+      toast.success(res?.data?.message)
       navigate('/login')
     } catch (err) {
       setError(

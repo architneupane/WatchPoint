@@ -5,6 +5,7 @@ import userRouter from "./routes/user.route.js"
 import productRouter from './routes/product.route.js'
 import cartRouter from './routes/cart.route.js'
 import paymentRouter from './routes/payment.route.js'
+import adminRouter from './routes/admin.route.js'
 
 const app = express()
 
@@ -21,6 +22,7 @@ app.use('/api/users', userRouter)
 app.use('/api/products', productRouter)
 app.use('/api/carts',cartRouter)
 app.use('/api/payments', paymentRouter)
+app.use('/api/admin', adminRouter)
 app.use((err, req, res, next) => {
   const status = err.statusCode || 500;
   const message = err.message || "Something went wrong";
