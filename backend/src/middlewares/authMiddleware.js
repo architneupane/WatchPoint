@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import ApiError from "../utils/ApiError.js";
 
-const authMiddleware = (req, res, next) => {
+export const authMiddleware = (req, res, next) => {
     const token = req.cookies?.token;
 
     if (!token) {
@@ -10,12 +10,12 @@ const authMiddleware = (req, res, next) => {
     
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = {id: decoded.id};
+    req.user = decoded;
+    if(req.user?.role !== "admin"){
+    throw new ApiError(403, "Admin access only")
+    }
     next();
   } catch (err) {
     throw new ApiError(401, "Invalid Token")
   }
 };
-
-
-export default authMiddleware

@@ -4,24 +4,36 @@ import { User } from "../models/userModel.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
-
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 export const adminLogin = asyncHandler( async(req,res)=>{
-    const {username, password} = req.body
+    const {username, password } = req.body
 
-    const adminUsername = "adminHo"
-    const adminPassword = "adminHo123"
-
-    if(adminUsername !== username){
+    if(username !== process.env.ADMIN_USERNAME){
         throw new ApiError(401, "Invalid Username")
     }
 
-    if(adminPassword !== password){
+    const isAdminPassowrdValid = await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH)
+
+    if(!isAdminPassowrdValid){
         throw new ApiError(401, "Invalid Password")
     }
 
+    const token = jwt.sign(
+        {role: 'admin'},
+        process.env.JWT_SECRET,
+        {expiresIn: '1h'}
+    )
+
+    res.cookie('token',token,{
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax'
+    })
+
     return res.status(200).json(
-        new ApiResponse(200, "Login Successful")
+        new ApiResponse(200,{}, "Admin Login Successful")
     )
 })
 

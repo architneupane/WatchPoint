@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./AdminDashboard.css";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function AdminDashboard() {
   const [productNameForRemove, setProductNameForRemove] = useState({});
   const [totalRegisteredUsers, setTotalRegisteredUsers] = useState();
   const [totalProducts, setTotalProducts] = useState("");
   const [totalOrders, setTotalOrders] = useState("");
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     productName: "",
@@ -52,14 +54,20 @@ function AdminDashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/admin/get-insights", {})
+      .post(
+        "http://localhost:8000/api/admin/admindashboard",
+        {},
+        { withCredentials: true }
+      )
       .then((res) => {
+        toast.success(res?.data?.message);
         setTotalOrders(res?.data?.data?.totalOrders);
         setTotalProducts(res?.data?.data?.totalProducts);
         setTotalRegisteredUsers(res?.data?.data?.totalUsers);
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message || "Internal Server Failure");
+        navigate("/");
       });
   }, []);
 

@@ -15,12 +15,11 @@ function AdminLogin() {
     axios
       .post(
         "http://localhost:8000/api/admin/admin-login",
-        { username, password },
-        {}
+        { username, password},
+        {withCredentials: true}
       )
       .then((res) => {
         navigate("/admin");
-        res?.data;
       })
       .catch((err) => setError(err?.response?.data?.message));
   };
