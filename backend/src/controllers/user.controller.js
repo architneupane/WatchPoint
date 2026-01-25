@@ -92,6 +92,26 @@ export const loginUser = asyncHandler( async (req,res) =>{
     )
     })
 
+export const loginWithGoogle = (req,res) =>{
+    let user = req.user
+
+    let token = jwt.sign(
+        {id: user._id, role: user.role},
+        process.env.JWT_SECRET,
+        {expiresIn: '7d'}
+    )
+
+    res.cookie('token', token,{
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax'
+    })
+    
+    res.redirect(
+        `${process.env.CLIENT_URL}login/success?token=${token}`
+    )
+}    
+
 export const logoutUser = (req,res)=>{
     res.cookie("token","",{
         httpOnly: true,

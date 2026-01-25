@@ -8,7 +8,7 @@
 
 .login-card{
     width: 500px;
-    height: 350px;
+    height: 400px;
     margin-bottom: 100px;
     padding: 20px;
     box-shadow: 0 6px 12px rgb(0,0,0,0.1);
@@ -42,4 +42,16 @@
    border: none;
 }
 
+.login-card .google-login-button{
+    font-size: xx-large;
+    padding-top: 4px;
+    width: 15%;
+    margin-left: 215px;
+    background-color: rgb(255, 255, 255);
+    border:1px solid grey;
+}
 
+.login-with-google{
+    font-size: smaller;
+    padding-left: 175px;
+}

@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 function Cards({products}) {
   
   const handleAddToCart = ((product) =>{
-    axios.post('http://localhost:8000/api/carts/addtocart',{
+    axios.post('http://localhost:8000/api/carts/add-to-cart',{
       productId: product._id,
       quantity: 1
     }, {withCredentials: true})

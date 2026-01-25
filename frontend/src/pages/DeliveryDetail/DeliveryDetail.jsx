@@ -34,10 +34,10 @@ function DeliveryDetail() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8000/api/payments/deliverydetails", {
+      .post("http://localhost:8000/api/payments/delivery-details", {
         deliveryData,
         orderId,
-      })
+      }, {withCredentials: true})
       .then((res) => {
         toast.success(res?.data?.message);
         navigate('/')
@@ -47,10 +47,10 @@ function DeliveryDetail() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/payments/getorderid", {
+      .get("http://localhost:8000/api/payments/get-orderid", {
         withCredentials: true,
       })
-      .then((res) => setOrderId(res.data.data._id))
+      .then((res) => setOrderId(res.data?.data))
       .catch((err) => console.error(err));
   }, []);
 
@@ -119,7 +119,7 @@ function DeliveryDetail() {
             >
               Cash On Delivery
             </button>
-            <div className="esewa"></div>
+            <div className="esewa"><EsewaButton deliveryData={deliveryData} amount={totalPrice} orderId={orderId} /></div>
           </div>
         </div>
       </form>

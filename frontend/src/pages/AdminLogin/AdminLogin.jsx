@@ -18,16 +18,16 @@ function AdminLogin() {
         { username, password},
         {withCredentials: true}
       )
-      .then((res) => {
-        navigate("/admin");
+      .then(() => {
+        navigate("/admin-dashboard");
       })
       .catch((err) => setError(err?.response?.data?.message));
   };
 
   return (
     <div className="login-container">
-      <div className="login-card">
-        <h1 className="login-title">Login User</h1>
+      <div className="login-card" style={{ height: "350px" }} >
+        <h1 className="login-title">Admin Login</h1>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="input-box">
             <label htmlFor="email">Email</label>

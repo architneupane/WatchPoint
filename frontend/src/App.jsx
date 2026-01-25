@@ -15,6 +15,8 @@ import DeliveryDetail from "./pages/DeliveryDetail/DeliveryDetail";
 import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import PaymentSuccess from "./pages/PaymentSuccess/PaymentSuccess";
 import PaymentFailure from "./pages/PaymentFailure/PaymentFailure";
+import LoginSuccess from "./pages/Login/LoginSuccess";
+import NoPage from "./pages/NoPage";
 
 function App() {
   return (
@@ -50,6 +52,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path='/login/success' element={<LoginSuccess />} />
             <Route path="/register" element={<Register />} />
             <Route path="/men" element={<Men />} />
             <Route path="/women" element={<Women />} />
@@ -59,7 +62,8 @@ function App() {
             <Route path="/success" element={<PaymentSuccess />} />
             <Route path="/failure" element={<PaymentFailure />} />
             <Route path="/admin-login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path='*' element={< NoPage />} />
           </Routes>
         </main>
 

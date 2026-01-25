@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { adminLogin, getInsights } from "../controllers/admin.controller.js";
-import {  authMiddleware } from "../middlewares/authMiddleware.js";
+import {  adminAuth } from "../middlewares/authMiddleware.js";
 
 const router = Router()
 
-router.route('/admindashboard').post( authMiddleware, getInsights)
+router.route('/get-insights').get( adminAuth, getInsights)
 router.route('/admin-login').post(adminLogin)
 
 export default router

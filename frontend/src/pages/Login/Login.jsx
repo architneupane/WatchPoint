@@ -3,6 +3,7 @@ import axios from "axios";
 import { UserContext } from "../../Context/UserContext";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
 import toast from 'react-hot-toast'
 
 function Login() {
@@ -36,10 +37,14 @@ function Login() {
     })
   };
 
+  const hanldeGoogleLogin = () => {
+    window.open('http://localhost:8000/api/users/google', '_self')
+  }
+
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1 className="login-title">Login User</h1>
+        <h1 className="login-title">User Login</h1>
         <form onSubmit={handleSubmit} className="login-form">
           <div className="input-box">
             <label htmlFor="email">Email</label> 
@@ -67,6 +72,8 @@ function Login() {
           )}
           <button type="submit">Login</button>
         </form>
+        <span className="login-with-google" >Or Login with Google</span><br />
+        <button className="google-login-button" onClick={hanldeGoogleLogin}><FcGoogle /></button>
       </div>
     </div>
   );

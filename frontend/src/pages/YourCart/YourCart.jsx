@@ -1,6 +1,6 @@
 import axios from "axios";
 import "../YourCart/YourCart.css";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
@@ -18,8 +18,8 @@ function YourCart() {
 
   const handleCheckOut = async () => {
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/payments/createorder",
+      await axios.post(
+        "http://localhost:8000/api/payments/create-order",
         { amount: totalPrice },
         { withCredentials: true }
       );
@@ -32,7 +32,7 @@ function YourCart() {
   const handleRemoveToCart = (itemId) => {
     axios
       .post(
-        "http://localhost:8000/api/carts/removecartitem",
+        "http://localhost:8000/api/carts/remove-cart-item",
         { itemId },
         { withCredentials: true }
       )
@@ -59,7 +59,7 @@ function YourCart() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/carts/getcartitems", {
+      .get("http://localhost:8000/api/carts/get-cart-items", {
         withCredentials: true,
       })
       .then((res) => {

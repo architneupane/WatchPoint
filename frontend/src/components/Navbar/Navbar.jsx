@@ -21,6 +21,7 @@ function Navbar() {
       .then((res) => {
         setUser(null);
         toast.success(res?.data?.message)
+        sessionStorage.removeItem('token')
         navigate("/");
       })
       .catch((err) => toast.error(err?.response?.data?.message));

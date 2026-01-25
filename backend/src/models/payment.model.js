@@ -9,7 +9,7 @@ const paymentSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    status: {
+    paymentStatus: {
         type: String,
         emun: ["Pending","Success" ,"Failed" ],
         default: "Pending"

@@ -55,7 +55,7 @@ export const removeProduct = asyncHandler(async (req, res) => {
   });
 
   if (!validProductName) {
-    throw new ApiError(404, "Invalid Prosuct Name");
+    throw new ApiError(404, "Invalid Product Name");
   }
 
   const product = await Product.findOneAndDelete({

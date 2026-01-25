@@ -31,7 +31,7 @@ function AdminDashboard() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8000/api/products/addproduct", formData, {})
+      .post("http://localhost:8000/api/products/add-product", formData, {withCredentials: true})
       .then((res) => toast.success(res?.data?.message))
       .catch((err) => {
         toast.error(err?.response?.data?.message || "Internal Server Failure");
@@ -42,9 +42,9 @@ function AdminDashboard() {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8000/api/products/removeproduct",
+        "http://localhost:8000/api/products/remove-product",
         productNameForRemove,
-        {}
+        {withCredentials: true}
       )
       .then((res) => toast.success(res?.data?.message))
       .catch((err) => {
@@ -54,13 +54,11 @@ function AdminDashboard() {
 
   useEffect(() => {
     axios
-      .post(
-        "http://localhost:8000/api/admin/admindashboard",
-        {},
+      .get(
+        "http://localhost:8000/api/admin/get-insights",
         { withCredentials: true }
       )
       .then((res) => {
-        toast.success(res?.data?.message);
         setTotalOrders(res?.data?.data?.totalOrders);
         setTotalProducts(res?.data?.data?.totalProducts);
         setTotalRegisteredUsers(res?.data?.data?.totalUsers);
@@ -69,7 +67,7 @@ function AdminDashboard() {
         toast.error(err?.response?.data?.message || "Internal Server Failure");
         navigate("/");
       });
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="admin-dashboard">

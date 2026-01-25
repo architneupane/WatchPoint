@@ -1,0 +1,49 @@
+# Node & logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage
+*.lcov
+.nyc_output
+
+# Dependency directories
+node_modules/
+bower_components/
+jspm_packages/
+web_modules/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+backend/.env
+.env.test
+.env.production
+
+# Build output
+dist/
+build/
+.cache
+.parcel-cache
+.next
+out
+.nuxt
+.vuepress/dist
+
+# Editor / IDE
+.vscode/
+.node_repl_history
+
+# Ignore specific private code (if needed)
+src/controllers/payment.controller.js
+src/routes/payment.route.js
