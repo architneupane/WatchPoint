@@ -63,7 +63,7 @@ function Home() {
             <button>See Details</button>
       </div>
 
-      <div className="categories">
+      <div className="categories" id="categories-section">
         <div className="category-card">
             <div className="category-image">
                 <img src="mencat.jpg" alt="" />

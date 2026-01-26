@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 function DeliveryDetail() {
   const navigate = useNavigate();
 
-  const { subTotal } = useCart();
+  const { subTotal, setProducts } = useCart();
+  
   const [orderId, setOrderId] = useState("");
 
   const deliveryCharge = 100;
@@ -44,6 +45,17 @@ function DeliveryDetail() {
       })
       .catch((err) => console.error("Error:", err));
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/carts/get-cart-items", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setProducts(res.data.data);
+      })
+      .catch((err) => console.log(err.message));
+  }, [setProducts]);
 
   useEffect(() => {
     axios

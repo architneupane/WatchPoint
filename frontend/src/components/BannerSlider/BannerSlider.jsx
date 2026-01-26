@@ -7,6 +7,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 function BannerSlider() {
+  const handleBuyNow = () => {
+    const categoriesSection = document.getElementById("categories-section");
+    if (categoriesSection) {
+      categoriesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <div>
       <Swiper
@@ -35,7 +41,7 @@ function BannerSlider() {
                 </span>
               </div>
               <div className="buy-now-btn">
-                <button>Buy Now</button>
+                <button onClick={handleBuyNow}>Buy Now</button>
               </div>
             </div>
           </div>
@@ -54,7 +60,7 @@ function BannerSlider() {
                 </span>
               </div>
               <div className="buy-now-btn">
-                <button>Buy Now</button>
+                <button onClick={handleBuyNow}>Buy Now</button>
               </div>
             </div>
           </div>
@@ -73,7 +79,7 @@ function BannerSlider() {
                 </span>
               </div>
               <div className="buy-now-btn">
-                <button>Buy Now</button>
+                <button onClick={handleBuyNow}>Buy Now</button>
               </div>
             </div>
           </div>
@@ -92,7 +98,7 @@ function BannerSlider() {
                 </span>
               </div>
               <div className="buy-now-btn">
-                <button>Buy Now</button>
+                <button onClick={handleBuyNow}>Buy Now</button>
               </div>
             </div>
           </div>
@@ -111,7 +117,7 @@ function BannerSlider() {
                 </span>
               </div>
               <div className="buy-now-btn">
-                <button>Buy Now</button>
+                <button onClick={handleBuyNow}>Buy Now</button>
               </div>
             </div>
           </div>

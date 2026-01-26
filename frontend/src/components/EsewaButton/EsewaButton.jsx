@@ -2,7 +2,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 function EsewaButton({ deliveryData, amount = 0, orderId }) {
-
   const handlePayment = async () => {
     try {
       if (!amount || amount <= 0) {
@@ -70,9 +69,9 @@ function EsewaButton({ deliveryData, amount = 0, orderId }) {
   };
 
   return (
-    <div>
-      <button type="button" onClick={handlePayment}>
-        Pay with Esewa
+    <div >
+      <button style={{color: '#3cc850', border: "none" , fontSize: "larger", marginLeft: '140px', marginTop: '10px'}} type="button" onClick={handlePayment}>
+      <span>eSewa</span>
       </button>
     </div>
   );

@@ -7,59 +7,61 @@ const PaymentSuccess = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [countdown, setCountdown] = useState(3);
-  const [orderId, setOrderId] = useState("");
   const [transactionUUID, setTransactionUUID] = useState(null);
 
-  useEffect(() => {
-    const verifyPayment = async () => {
-      try {
-        const uuid = localStorage.getItem("transaction_uuid");
-        const totalAmount = localStorage.getItem("total_amount");
 
-        setTransactionUUID(uuid);
+ useEffect(() => {
+  const verifyPayment = async () => {
+    try {
+      const uuid = localStorage.getItem("transaction_uuid");
+      const totalAmount = localStorage.getItem("total_amount");
 
-        if (!uuid || !totalAmount) {
-          toast.error("Payment data not found");
-          navigate("/failure");
-          return;
-        }
-
-        axios
-          .get("http://localhost:8000/api/payments/get-orderid", {
-            withCredentials: true,
-          })
-          .then((res) => setOrderId(res.data?.data))
-          .catch((err) => console.error(err));
-
-        const response = await axios.post(
-          "http://localhost:8000/api/payments/verify-response",
-          {
-            orderId,
-            transaction_uuid: uuid,
-            total_amount: totalAmount,
-          },
-          {
-            withCredentials: true,
-          },
-        );
-
-        if (response.status === 200) {
-          toast.success("Payment completed successfully!");
-
-          localStorage.removeItem("transaction_uuid");
-          localStorage.removeItem("total_amount");
-
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error("Payment verification error:", error);
-        toast.error("Payment verification failed");
+      if (!uuid || !totalAmount) {
+        toast.error("Payment data not found");
         navigate("/failure");
+        return;
       }
-    };
 
-    verifyPayment();
-  }, [navigate]);
+      setTransactionUUID(uuid);
+
+      const orderRes = await axios.get(
+        "http://localhost:8000/api/payments/get-orderid",
+        { withCredentials: true }
+      );
+
+      const orderId = orderRes.data?.data;
+
+      if (!orderId) {
+        toast.error("Order ID not found");
+        navigate("/failure");
+        return;
+      }
+
+      const response = await axios.post(
+        "http://localhost:8000/api/payments/verify-response",
+        {
+          orderId,
+          transaction_uuid: uuid,
+          total_amount: totalAmount,
+        },
+        { withCredentials: true }
+      );
+
+      if (response.status === 200) {
+        toast.success("Payment completed successfully!");
+        localStorage.removeItem("transaction_uuid");
+        localStorage.removeItem("total_amount");
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Payment verification error:", error);
+      toast.error("Payment verification failed");
+      navigate("/failure");
+    }
+  };
+
+  verifyPayment();
+}, [navigate]);
 
   useEffect(() => {
     if (!loading) {

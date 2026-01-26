@@ -12,10 +12,6 @@ dist
 dist-ssr
 *.local
 
-src/pages/PaymentSuccess/PaymentSuccess.jsx
-src/pages/FailureSuccess/FailureSuccess.jsx
-src/pages/DeliveryDetails/DeliveryDetails.jsx
-src/components/EsewaButton/EsewaButton.jsx
 
 # Editor directories and files
 .vscode/*

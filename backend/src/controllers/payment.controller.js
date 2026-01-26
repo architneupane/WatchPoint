@@ -125,15 +125,14 @@ export const verifyEsewaPaymentResponse = asyncHandler(async (req, res) => {
   if (!transaction_uuid || !total_amount) {
     throw new ApiError(400, "Missing transaction_uuid or total_amount");
   }
-  console.log(orderId);
   try {
-    const order = await Order.findById({ _id: orderId });
+    const order = await Order.findOne({ _id: orderId });
 
     if (!order) {
       throw new ApiError(404, "Order not found for this transaction");
     }
 
-    const payment = await Payment.Cretae(
+    const payment = await Payment.create(
       {
         transaction_uuid,
         totalAmount: total_amount,

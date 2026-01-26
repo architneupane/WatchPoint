@@ -45,5 +45,3 @@ out
 .node_repl_history
 
 # Ignore specific private code (if needed)
-src/controllers/payment.controller.js
-src/routes/payment.route.js
